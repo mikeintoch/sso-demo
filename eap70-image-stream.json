@@ -1,0 +1,26 @@
+{
+    "kind": "ImageStream",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "jboss-eap70-openshift",
+        "annotations": {
+            "openshift.io/image.insecureRepository": "true"
+        }
+    },
+    "spec": {
+        "dockerImageRepository": "brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888/jboss-eap-7/eap70-openshift",
+        "tags": [
+            {
+                "name": "1.4-6",
+                "annotations": {},
+                "from": {
+                    "kind": "DockerImage",
+                    "name": "brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888/jboss-eap-7/eap70-openshift:1.4-6"
+                },
+                "importPolicy": {
+                    "insecure": true
+                }
+            }
+        ]
+    }
+}
