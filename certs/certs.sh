@@ -14,7 +14,7 @@ keytool -import -noprompt -keystore truststore.jks -file ca-certificate.pem -ali
 
 suffix=dempsey-training2.apps.latest.xpaas
 
-for hostname in sso-secure.$suffix jaxrs-secure.$suffix jee-secure.$suffix app-profile-jee-saml-secure.$suffix
+for hostname in sso-secure.$suffix jaxrs-secure.$suffix jee-secure.$suffix saml-secure.$suffix
 do
   CN=${hostname}
   keystore=${hostname}.jks

@@ -349,7 +349,7 @@
                         }
                     },
                     "spec": {
-                        "serviceAccountName": "eap7-service-account",
+                        "serviceAccountName": "eap-service-account",
                         "terminationGracePeriodSeconds": 60,
                         "containers": [
                             {
