@@ -4,7 +4,7 @@
         logoutPage="/index.jsp">
         <Keys>
             <Key signing="true">
-                <KeyStore resource="/etc/eap-secret-volume/saml.jks" password="password">
+                <KeyStore file="/etc/eap-secret-volume/saml.jks" password="password">
                     <PrivateKey alias="app-profile-jee-saml" password="password"/>
                     <Certificate alias="app-profile-jee-saml"/>
                 </KeyStore>
@@ -28,7 +28,7 @@
                                  redirectBindingUrl="https://sso-secure.dempsey-training2.apps.latest.xpaas/auth/realms/xpaas/protocol/saml"/>
             <Keys>
                 <Key signing="true">
-                    <KeyStore resource="/etc/eap-secret-volume/saml.jks" password="password">
+                    <KeyStore file="/etc/eap-secret-volume/saml.jks" password="password">
                         <Certificate alias="xpaas"/>
                     </KeyStore>
                 </Key>
