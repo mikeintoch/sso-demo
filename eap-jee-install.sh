@@ -34,8 +34,8 @@ oc process eap70-sso-s2i \
   SSO_SAML_KEYSTORE_PASSWORD="" \
   SSO_TRUSTSTORE=/etc/eap-secret-volume/truststore.jks \
   SSO_TRUSTSTORE_PASSWORD=password \
-  JAVA_OPTS_APPEND="-Djavax.net.ssl.trustStore=/etc/eap-secret-volume/truststore.jks -Djavax.net.ssl.trustStorePassword=password" \
   SSO_TRUSTSTORE_SECRET=eap-jee-secret | oc create -f - 
 
 oc env dc jee SERVICE_URL=https://jaxrs-secure.dempsey-training2.apps.latest.xpaas/service-jaxrs
+oc env dc jee JAVA_OPTS_APPEND="-Djavax.net.ssl.trustStore=/etc/eap-secret-volume/truststore.jks -Djavax.net.ssl.trustStorePassword=password"
 
