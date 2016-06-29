@@ -1,7 +1,7 @@
-<secure-deployment name="YOUR-WAR.war">
+<secure-deployment name="app-profile-jee-saml.war">
     <SP entityID="app-profile-jee-saml"
         sslPolicy="EXTERNAL"
-        logoutPage="SPECIFY YOUR LOGOUT PAGE!">
+        logoutPage="/index.jsp">
         <Keys>
             <Key signing="true">
                 <PrivateKeyPem>
