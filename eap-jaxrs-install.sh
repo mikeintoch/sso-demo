@@ -32,10 +32,10 @@ oc process eap70-sso-s2i \
   JGROUPS_ENCRYPT_KEYSTORE=jgroups.jceks \
   JGROUPS_ENCRYPT_NAME="" \
   JGROUPS_ENCRYPT_PASSWORD=password \
-  SSO_URL=https://jee-secure.dempsey-training2.apps.latest.xpaas/auth \
+  SSO_URL=https://sso-secure.dempsey-training2.apps.latest.xpaas/auth \
   SSO_REALM=xpaas \
   SSO_USERNAME=mgmtuser \
-  SSO_PASSWORD=mgmtuser \
+  SSO_PASSWORD=mgmtpass \
   SSO_BEARER_ONLY=true \
   SSO_SAML_KEYSTORE_SECRET=eap-jaxrs-secret \
   SSO_SAML_KEYSTORE="" \
