@@ -30,7 +30,7 @@ oc process eap70-sso-s2i \
   HTTPS_PASSWORD=password \
   JGROUPS_ENCRYPT_SECRET=eap-jaxrs-secret \
   JGROUPS_ENCRYPT_KEYSTORE=jgroups.jceks \
-  JGROUPS_ENCRYPT_NAME="" \
+  JGROUPS_ENCRYPT_NAME=jgroups-key \
   JGROUPS_ENCRYPT_PASSWORD=password \
   SSO_URL=https://sso-secure.dempsey-training2.apps.latest.xpaas/auth \
   SSO_REALM=xpaas \

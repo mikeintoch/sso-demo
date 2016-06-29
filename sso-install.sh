@@ -19,12 +19,14 @@ oc policy add-role-to-user view system:serviceaccount:dempsey-training2:sso-serv
 
 oc process sso70-postgresql-persistent \
   HOSTNAME_HTTPS=sso-secure.dempsey-training2.apps.latest.xpaas\
+  HTTPS_NAME=sso-secure.dempsey-training2.apps.latest.xpaas\
   HTTPS_SECRET=sso-secret\
   HTTPS_KEYSTORE=keystore.jks\
   HTTPS_PASSWORD=password\
   JGROUPS_ENCRYPT_SECRET=sso-secret\
   JGROUPS_ENCRYPT_KEYSTORE=jgroups.jceks\
   JGROUPS_ENCRYPT_PASSWORD=password\
+  JGROUPS_ENCRYPT_NAME=jgroups-key\
   SSO_REALM=xpaas\
   SSO_SERVICE_USERNAME=mgmtuser\
   SSO_SERVICE_PASSWORD=mgmtpass\
