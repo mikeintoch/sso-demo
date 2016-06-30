@@ -2,7 +2,6 @@
 
 oc process eap70-sso-s2i \
   APPLICATION_NAME=jaxrs \
-  HOSTNAME_HTTP=jaxrs.dempsey-training2.apps.latest.xpaas \
   HOSTNAME_HTTPS=jaxrs-secure.dempsey-training2.apps.latest.xpaas \
   SOURCE_REPOSITORY_URL=https://github.com/maschmid/sso-demo.git \
   SOURCE_REPOSITORY_REF=master \

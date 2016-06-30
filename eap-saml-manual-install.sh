@@ -2,7 +2,6 @@
 
 oc process eap70-https-s2i \
   APPLICATION_NAME=profile \
-  HOSTNAME_HTTP=profile.dempsey-training2.apps.latest.xpaas \
   HOSTNAME_HTTPS=profile-secure.dempsey-training2.apps.latest.xpaas \
   SOURCE_REPOSITORY_URL=https://github.com/maschmid/sso-demo.git \
   SOURCE_REPOSITORY_REF=master \

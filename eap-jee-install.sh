@@ -2,7 +2,6 @@
 
 oc process eap70-sso-s2i \
   APPLICATION_NAME=jee \
-  HOSTNAME_HTTP=jee.dempsey-training2.apps.latest.xpaas \
   HOSTNAME_HTTPS=jee-secure.dempsey-training2.apps.latest.xpaas \
   SOURCE_REPOSITORY_URL=https://github.com/maschmid/sso-demo.git \
   SOURCE_REPOSITORY_REF=master \
