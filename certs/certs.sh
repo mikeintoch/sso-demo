@@ -14,16 +14,16 @@ keytool -import -noprompt -keystore truststore.jks -file ca-certificate.pem -ali
 
 suffix=dempsey-training2.apps.latest.xpaas
 
-for hostname in sso-secure.$suffix jaxrs-secure.$suffix jee-secure.$suffix saml-secure.$suffix
+for appname in sso-secure jaxrs-secure jee-secure saml-secure
 do
-  CN=${hostname}
-  keystore=${hostname}.jks
+  CN=${appname}.${suffix}
+  keystore=${appname}.jks
   
   # Create a keystore with new keypair for a given CN
-  keytool -genkeypair -keyalg RSA -noprompt -alias ${CN} -dname "CN=${CN}, OU=QE, O=RedHat, L=Brno, S=CZ, C=CZ" -keystore ${keystore} -storepass "password" -keypass "password"
+  keytool -genkeypair -keyalg RSA -noprompt -alias ${appname} -dname "CN=${CN}, OU=QE, O=RedHat, L=Brno, S=CZ, C=CZ" -keystore ${keystore} -storepass "password" -keypass "password"
 
   # Generate a certificate request
-  keytool -keystore ${keystore} -certreq -alias ${CN} --keyalg rsa -file ${CN}".csr" -storepass "password"
+  keytool -keystore ${keystore} -certreq -alias ${appname} --keyalg rsa -file ${CN}".csr" -storepass "password"
 
   # Sign the certificate request with the CA cert
   openssl x509 -req -CA ca-certificate.pem -CAkey ca-key.pem -in ${CN}.csr -out ${CN}.cer -days 365 -CAcreateserial -passin "pass:password"
@@ -32,7 +32,7 @@ do
   keytool -import -noprompt -keystore ${keystore} -file ca-certificate.pem -alias xpaas.ca -storepass "password"
 
   # Import signed cert  into keystore
-  keytool -import -keystore ${keystore} -file ${CN}".cer" -alias ${CN} -storepass "password"
+  keytool -import -keystore ${keystore} -file ${CN}".cer" -alias ${appname} -storepass "password"
 done
 
 

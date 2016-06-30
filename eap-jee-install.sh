@@ -1,13 +1,5 @@
 #!/bin/sh
 
-cd certs/
-
-oc secrets new eap-jee-secret keystore.jks=jee-secure.dempsey-training2.apps.latest.xpaas.jks truststore.jks=truststore.jks jgroups.jceks=jgroups.jceks
-
-cd ..
-
-oc secrets add serviceaccount/eap-service-account secrets/eap-jee-secret
-
 oc process eap70-sso-s2i \
   APPLICATION_NAME=jee \
   HOSTNAME_HTTP=jee.dempsey-training2.apps.latest.xpaas \
@@ -18,7 +10,7 @@ oc process eap70-sso-s2i \
   ARTIFACT_DIR=target \
   HTTPS_SECRET=eap-jee-secret \
   HTTPS_KEYSTORE=keystore.jks \
-  HTTPS_NAME=jee-secure.dempsey-training2.apps.latest.xpaas \
+  HTTPS_NAME=jee-secure \
   HTTPS_PASSWORD=password \
   JGROUPS_ENCRYPT_SECRET=eap-jee-secret \
   JGROUPS_ENCRYPT_KEYSTORE=jgroups.jceks \
