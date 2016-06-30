@@ -40,7 +40,10 @@
     </security-constraint>
 
     <login-config>
-        <auth-method>KEYCLOAK</auth-method>
+        <auth-method >
+            <!-- You may also try KEYCLOAK-SAML -->
+            KEYCLOAK
+        </auth-method>
     </login-config>
 
     <security-role>
