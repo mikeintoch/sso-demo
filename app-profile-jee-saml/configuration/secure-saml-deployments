@@ -4,12 +4,10 @@
         logoutPage="/index.jsp">
         <Keys>
             <Key signing="true">
-                <PrivateKeyPem>
-                    MIIEpAIBAAKCAQEAozMDn0JvIOSi/4Uy2jbI+8bPDB6amoZXlrMafbJ13F9vzV8BvRRTLWMWDSelXWQrkLEGr1S7leHZFtY+RIxWkJupf7R7dPEhuplPo/isMZt7axBwEntUeHl/OBmarUFQ2a85tNAGWPkUygYjohxzQ6WERFGdt16ejxnE+LoHb5yVnhs5gkT3k8Am7/ogus8fSBTy4XiOKCxepVvPvIUVwCZLzSaDy3KPibAjAhbkN/TAVjgy839qXy6xGStEh8vC5J//6uGdadtBZjATUsDPjUEYksbKuEILL+7zI4GFx3sowCLKlOcsmY8ZWY3X6DLEEtQ5KRzR4X/U2VCXK3Q3YQIDAQABAoIBACAS1pNmKxD73kz5kJTyT22sFOT83sWfwXcMnBg4CpHU79Qc5+qRJAe3gY30TLueBDHbmMS8kmFSkae7U2GFcz3YWeePQPQqr8ZMeypupOja9daE1IHNWzySJD6SSaPjQlCF74FpoNW7nipWKoqhrMWOsf/7SlPPdLoLBnsblHqKqzdTyXK8yyfoU9d96P7QJk+oCew25KI55DHx9vfymtTy+sUu+Lp0e/NRCsLv8uUobGZEqoNS4RVxTCGQ3c5j6v7ck5ji35AAxZNh8ugzEJ/j7VtauqNGNn1wWymve+fFvDApcocxDr6AGOvABTmC/Cx0ZQQNboZKd7NQJHg9AAECgYEA1BL5zTedzQhq94L1ucfSzYHWn4faXREJJ5uTvZIvlbr4+9a9BV5IfkogoluTzZxwIgR2N7ec58tyd5YGalTj5zoho4S/VZ0N/5EknhMFUXTPPHSsQ6pR7DA3M1CJp7RaC9Lqr1aPst026BOPITuH++OymJ8Vxlvc9sEA+2S2wQECgYEAxQB/OKTYLpXCB62J9Sp0vonamOkGe6RdSJyUsZxPZxCrQDe6oOcEu4xC5lXXkE4EHEc9/Z6FPqzPl5ZIzNtrArns+vqEYN2mWUhVbg0MunWILOgy5TnOiSR4nKSlErh2lGHRVb6/WP0998uzU0PguygfsJcEcx69TXGEPm6fFmECgYEAnKBPIcNbphv7dEWiWc084U5tRnE9UtLMIhaC7NVUk479aHHWNGrHu43fwElGReqt3lHRRaE0HvVg2vVQU6PSlemXAn9+GCrgNcnqc1y05s4QaCP7PhZCXt/VRO7MW7GVd3oUnd6eTomWjZw0b2TaL6yhMJr9p/wcm5k7sm9VkgECgYEAmAz9JKQe8z3FZ5Wq8F5XgyT1YqYgydef5EZugfOKWZtFAijBVCVawsLMc+l3mrqMc6MNFq5+W1SYWYC2Kd+E5bLJVSF8gSMynKC2x10tINFMTJTfi4slfTZ4HTb67csQQxCIuOyj1bSIWrSPcUnnr6yVYP/+gDgOljJyhpltEqECgYA0sygtYz4kQJ/cmF+KGGWLe/1Kw7j3NzeTc7txqGdVgkSeliKgpts+Gt2qtj3pCFVAG0/aKi0uIY6wuh3UndHMiDcNpIxbg9V3ohoWM+fgPXJu2kuUIQBeANHOblBJrFwj/XzW6nXzChhgdvOPGZzBvSwJoMdMEyL0brKfNWgr1Q==
-                </PrivateKeyPem>
-                <CertificatePem>
-                    MIICtzCCAZ8CBgFVoPjNtjANBgkqhkiG9w0BAQsFADAfMR0wGwYDVQQDDBRhcHAtcHJvZmlsZS1qZWUtc2FtbDAeFw0xNjA2MzAxMTAwMDhaFw0yNjA2MzAxMTAxNDhaMB8xHTAbBgNVBAMMFGFwcC1wcm9maWxlLWplZS1zYW1sMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAozMDn0JvIOSi/4Uy2jbI+8bPDB6amoZXlrMafbJ13F9vzV8BvRRTLWMWDSelXWQrkLEGr1S7leHZFtY+RIxWkJupf7R7dPEhuplPo/isMZt7axBwEntUeHl/OBmarUFQ2a85tNAGWPkUygYjohxzQ6WERFGdt16ejxnE+LoHb5yVnhs5gkT3k8Am7/ogus8fSBTy4XiOKCxepVvPvIUVwCZLzSaDy3KPibAjAhbkN/TAVjgy839qXy6xGStEh8vC5J//6uGdadtBZjATUsDPjUEYksbKuEILL+7zI4GFx3sowCLKlOcsmY8ZWY3X6DLEEtQ5KRzR4X/U2VCXK3Q3YQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQCba0lLlpcwPqM1lmA7Q9xKavtMFTUVzcIqIjfzvZT5hZqRigPkqb8rAo8If9Io0vhRK0Qi0Y5Mi7q7PBjMpO/gKksoGXAecNMpoKVjTqKxquXXYiwLhTQMoNqtdFXLw7orSa43Q/Lr2q52kufpJpGLxxQU7Ka22In4tKwYB+U012wApirhEvr8oDYikH7EFiZougPmyoOEBtpogg+msjZ2L3r17zmHbcOrGp7p1sT2/+MIFnvcUYu+EKDpl9jCL40J1qTgaYeAoT6pX8cg97G5MUR9gpfJv3+WfZTS68nH4eT8oG7Z+gh/QljagH+Dvt/Cc7TpuSpxpYOb1HXuE7Cm
-                </CertificatePem>
+               <KeyStore file="/etc/eap-secret-volume/saml.jks" password="password">
+                    <PrivateKey alias="app-profile-jee-saml" password="password"/>
+                    <Certificate alias="app-profile-jee-saml"/>
+               </KeyStore>
             </Key>
         </Keys>
         <IDP entityID="idp"
@@ -30,9 +28,9 @@
                                  redirectBindingUrl="https://sso-secure.dempsey-training2.apps.latest.xpaas/auth/realms/xpaas/protocol/saml"/>
             <Keys>
                 <Key signing="true">
-                    <CertificatePem>
-                       MIICmTCCAYECBgFVoOo3MTANBgkqhkiG9w0BAQsFADAQMQ4wDAYDVQQDDAV4cGFhczAeFw0xNjA2MzAxMDQ0MTJaFw0yNjA2MzAxMDQ1NTJaMBAxDjAMBgNVBAMMBXhwYWFzMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnrkJA86lYKwSLf0omZIbgkbpNuG/YDu5KHyJpCZ8yNYxADANWZsrccOs2pmjeR8Zrgyx1IrGp02/bB2Gi5BssVG+dvOlh2ORiTU35Re8w+RfbDghoLyBZ8RCyRcTwNDMj3nei1ad26ucOUU6DDuot7sUCviZS7+KrRK8Qz8ifOqNavcN928MTfg9mWqFGmqEmFvLzz6NdHBO3qUU5kCqVJCO/lxM5O31aCjsBwW/l6VpkdC1eir4VFJhUOglmVlhGnWdZwHrCRfxqlmqCinawTb479V99Wgy92YN50Ifr4AZv4LTGe4X6A9tD9sE1eTfwxd0HpcXAAhA+mm3qdkRiQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQAf7qIupSzNgVj/sINCgbRwNM2P7t6ACYtNUW91Ur2KxPzMlOe2e0AW7t+I4XUiI3wSlTidHfdd3zTJYO6gF71bqKfTjGhbb9F8rit6rKHuPO3HC2ZRuvbn8gYv72meXklLOjDBIEbh2vFQLWeS2nUIle6Z/R6xfgrGM/6zA/5XsR4cVtN5Z/3F2vk1kzlIrByAvCMlmd2gqC2e2qX/Hsf8o0BZYlHNrrhFcMLUlY0FkPVyUFQRdSBAmYUL4i4Cw1pJLQEHRZCsy/o4rjnGOr2ifQb2+3Q5Q4WGMc6bGTH/IJegoMAnQ1jjJOhF/CyfDYxh6d7ubFNJUINzHPaEiOVw
-                    </CertificatePem>
+                    <KeyStore file="/etc/eap-secret-volume/saml.jks" password="password">
+                        <Certificate alias="xpaas"/>
+                    </KeyStore>
                 </Key>
             </Keys>
         </IDP>
