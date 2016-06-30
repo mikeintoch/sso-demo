@@ -1,0 +1,40 @@
+<secure-deployment name="YOUR-WAR.war">
+    <SP entityID="app-profile-jee-saml"
+        sslPolicy="EXTERNAL"
+        logoutPage="SPECIFY YOUR LOGOUT PAGE!">
+        <Keys>
+            <Key signing="true">
+                <PrivateKeyPem>
+                    MIIEowIBAAKCAQEAowbBy4VmyNJx5i5VtuL5/dYMLk4XqJ69oVOJILnNtDt29Qf6aLONIC0860hjcHEbY0VxwKNiiqHItawvV6lJnSb7x2+M3lZ8K0hNA5q0612t3lkZzYSwfhWleNDre5eW/EPIHpYwGtO214fpfguK78ceiXNv1AUkxumsqNYTkUEywqOEgwawpL8oT7JjiFbjwC+myX2IR69+FxD96af6EuauAvGQQe+ecZ4LRpz78ErjsLyvmsVYlOMV9wKdfKudGLX9BYhQVax5L0XA/MFZ6IhI04ruXTDGrlpuCr0or4ZTewYGOqL3TlcSDJ3KqLbh/5zFwbWfcAZs7VoiKHpmiwIDAQABAoIBAQCHMDFAXg1P9wMwh7fYgvwffIJ5W5TO5WQHBciu9KUaEj2hD86dSFd9GUZtLYgYVBMMDSg5QMOUhnhz/qb7oIxE33DmfyBnt3wcQEZs+LuSegqWWXjGLoRU6gpf14+O27P+2Q54Hr8hX/M9Y51CQrwh/hLalHllbiaDNH9TOsLbLcrT1UxeKKiK2TmNC5eVazWx3WQqkdsUTUUDZcCXJMpyuCtn8W02qf9BbnmseGxXhKXLldQRRsLZWKBD8bwTL0cj7+8kqTbqY7SVCwKRNAfbFZGU011emLDYnwIu12+lbcfGAIPw8fz5jjXMdlL00KK1dY2sQKX7HYEf15lQYtzBAoGBAOQU1u3RHPH/Su43pWMfFqqS0Sl7oRGMSyqCMByYrpQVzA2nOX6j3VK6n5NzHEK857xH7Kr9/Wg3MEYAv8m3Loaum8B3N9AAfXZ9HCv9KarEfN+LYnC6Tr5EME0qHlaGum0rvXvP++pDUqGps62F0bGfgyyKt3AZZwgBabbjzcd7AoGBALb7Wmwwf/E4n1OfuAn81p3nGe6OOeUIn+PYDotak8ZU0jSn0aHdHw1llmDcyqWpX2rAHq0yttRgGAtItvOqwSm7QDx6TWTyiqeSRhxqoeasS6Qr4YVEfhPTsPDZaj+x0eUuIQwx7ac2W7qL1tmx0MaQ/o33h9+ZYhIwP40LBCgxAoGACrugUZihkBG/aO5dbgisfGJkTVtv/O9pKhruQKo+rOFJtOrFndwAMkBt+fZUwh85mHaaAIHrRtgyAVlPrSJdoiDdW3VAvx0GymigxsEnEM4mQi7A9yUNR47V5wuwWcoFQ9XnGMh0xlVcshbWSbgeYglrltEASNopKwtF+kFGEbkCgYBmmKRoiQETtZXQA3vjTbrgKlXl5iUcACv2SoxNImo9CA4crAPkZ+EjV9RrVyDgpgj0B+irYAYXKhIRMaIzGYjY5z7rKf//G+cWcfORt1Az0GNRF7GJUZAHeeh6As2KDSANCkJJXi1MVjQ0cnfy87qFu4KfAy1R9+R/IkJfyM954QKBgDdA23NycGgWhRYi3qc94fFDJyo+Zeqn+tf98yTkWyXYtctqMPH7EmBxsLwxZyYlrMQrcwGthnQXz1GZ5mqwugZBBRy47iBaBTCcPQR7kCu4euEU0vn8T0jD1Icyqo21W6AYBRgTKtWK7znIseEPcGd7Ps5HNcTtgaMOBzJ1yfSp
+                </PrivateKeyPem>
+                <CertificatePem>
+                    MIICtzCCAZ8CBgFVoYr/mzANBgkqhkiG9w0BAQsFADAfMR0wGwYDVQQDDBRhcHAtcHJvZmlsZS1qZWUtc2FtbDAeFw0xNjA2MzAxMzM5NDlaFw0yNjA2MzAxMzQxMjlaMB8xHTAbBgNVBAMMFGFwcC1wcm9maWxlLWplZS1zYW1sMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAowbBy4VmyNJx5i5VtuL5/dYMLk4XqJ69oVOJILnNtDt29Qf6aLONIC0860hjcHEbY0VxwKNiiqHItawvV6lJnSb7x2+M3lZ8K0hNA5q0612t3lkZzYSwfhWleNDre5eW/EPIHpYwGtO214fpfguK78ceiXNv1AUkxumsqNYTkUEywqOEgwawpL8oT7JjiFbjwC+myX2IR69+FxD96af6EuauAvGQQe+ecZ4LRpz78ErjsLyvmsVYlOMV9wKdfKudGLX9BYhQVax5L0XA/MFZ6IhI04ruXTDGrlpuCr0or4ZTewYGOqL3TlcSDJ3KqLbh/5zFwbWfcAZs7VoiKHpmiwIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQAYAxevU2g7JVZ6CkvFIOm502bVEqYKFS65qN+DGG63bjLQ1wrjM2zUrX2mTxUdeShSs6ZXH+axBZfPRkDwOEqk3O+xE3rcm+bDGT0YT2T+j1CEv6SRBvWW/yenjyFRaEaNXqq5JVZ5JtP2rh4kb+FFjxosHnCJ8/r0gP4yqdx1lBB2Mgj+eBzztSGAjUPluJwmBRNU0sd9dGDtD27M26TWwPlT2KpOP+RWqNwHc5FGpJ2gMhSXlC04d6z4HHoYsZTUwrOASeJ+VPEIj9Li8Pu9YcQe6YCgkr7K/zArPZOxw33LK2prDRmiucSYeHgpV6jHF2HyYcr6HIZTFy83CweJ
+                </CertificatePem>
+            </Key>
+        </Keys>
+        <IDP entityID="idp"
+             signatureAlgorithm="RSA_SHA256"
+             signatureCanonicalizationMethod="http://www.w3.org/2001/10/xml-exc-c14n#">
+            <SingleSignOnService signRequest="true"
+                                 validateResponseSignature="true"
+                                 validateAssertionSignature="false"
+                                 requestBinding="POST"
+                                 bindingUrl="https://sso-secure.dempsey-training2.apps.latest.xpaas/auth/realms/xpaas/protocol/saml"/>
+            <SingleLogoutService signRequest="true"
+                                 signResponse="true"
+                                 validateRequestSignature="true"
+                                 validateResponseSignature="true"
+                                 requestBinding="POST"
+                                 responseBinding="POST"
+                                 postBindingUrl="https://sso-secure.dempsey-training2.apps.latest.xpaas/auth/realms/xpaas/protocol/saml"
+                                 redirectBindingUrl="https://sso-secure.dempsey-training2.apps.latest.xpaas/auth/realms/xpaas/protocol/saml"/>
+            <Keys>
+                <Key signing="true">
+                    <CertificatePem>
+                       MIICmTCCAYECBgFVoXsWqjANBgkqhkiG9w0BAQsFADAQMQ4wDAYDVQQDDAV4cGFhczAeFw0xNjA2MzAxMzIyMjZaFw0yNjA2MzAxMzI0MDZaMBAxDjAMBgNVBAMMBXhwYWFzMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwYDHrCH+RACMWkY7Qt64ulXSpjmjG7u6GSDjOeg9JH6mN1sm2z4VwyUmXQsrP+dI5NXERHYZHqhQkciH5K9mL/cAE5PRmjbMP/18nXQ6XEyDNnReVzEuAVhLDvg6Aki/6ktbJ8WmfSSk5mtlkjNeMT6XBfonf5cWSP59wKyfc59qcRlPXaFOdq7TBlg8JKlR0gicDS1D+KKW+bZkpHQ8vvlocoGTMaIwyynzRo2PQO07gv7ZLG0QOjIy5gz6OJTe3rSACdi5otrdnjQ3oX3dXOLDsQ/kv7hP4RIzn+mK0ezVQ470IPNSAtsCO88FGUUmB7uPwc/Jk4dYDB000/g8VQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQAqBT2Rpj7BNCxA83c0jo3NRVA6h/knsRiT1okUqxM2wHwF00GOIQQCQ4JblxA0Ad6aY3HxrCFddiahY04QO4DLRYa/BtUy/K2VSmG2u7i5opspe82HgFApCL9eOQgLTflRbh3SOq5pYTOcAsw+wI9LGIPTk02FKh48Fa/W549B5PctycdRz8/ccmT9BxdTmP4efpU1qQHRwCxDGLWOBLm8jtsMkWInBA7ImYwPSZbtAX6Y8f147zmjrhGJr/Pumxe1dElBnhoEt2RPORMcRoJhYGigQ7Z0SLG32zqaSCmv/ZDEBS8GR4ZUeoci4OfFBrhZzbJDUWX3b65UqpWHfKEL
+                    </CertificatePem>
+                </Key>
+            </Keys>
+        </IDP>
+    </SP>
+</secure-deployment>
