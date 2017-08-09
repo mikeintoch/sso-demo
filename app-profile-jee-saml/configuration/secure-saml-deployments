@@ -1,13 +1,15 @@
-<secure-deployment name="app-profile-jee-saml.war">
+<secure-deployment name="YOUR-WAR.war">
     <SP entityID="app-profile-jee-saml"
         sslPolicy="EXTERNAL"
-        logoutPage="/index.jsp">
+        logoutPage="SPECIFY YOUR LOGOUT PAGE!">
         <Keys>
             <Key signing="true">
-               <KeyStore file="/etc/eap-secret-volume/saml.jks" password="password">
-                    <PrivateKey alias="app-profile-jee-saml" password="password"/>
-                    <Certificate alias="app-profile-jee-saml"/>
-                </KeyStore>
+                <PrivateKeyPem>
+                    MIIEpAIBAAKCAQEAnb1SH74rHCbSAQNM+r73Wus88UBPRz8iLc2jRW6czxCD405/ACko3D/jVUl3CQbDujQB+uz4gzbI8H/DjULfbrPzPEWrki/RbMpLNAwGKRfz/uhDRToDJJsn5GBogvgESI8PPNAzXLq0t1EyQHdvRNPy+3kcMKhCQXBsOCByCGQLrxZUicAphJwS1UNp6dtixiRGiYceF0G3jQGlUKCycQzSuOOVo2Ui5sIGZ7vNwOfNrIoyIgZslsRNCkFvfyngS8HlSJY0X7jEWXQiGRyYvLjhHd8+H808IX/it2VxaKht+RN79JFklQt5cfkoIE7cAYYQkI94hCeqEAi/CZYkAwIDAQABAoIBABVdCr5Z1yTc7RxOAiMDsiSSL5LNDu+rUUm6zB4fOQWiSvqCKxkueeY6kOOAK6sBS4jwekQtzAqZZOWNqEJ9iB1KKetD1FTcPRTq4PyPlFYEdHtVoabCkKJokSKRHBaA2LOrDHlECXDJqKgbSx8IDf3YZtRANt0wLKkIPN/tJQSVsRv8hfISS3wC580/mjWHWN57xPc9aHTcjXX/rMvBjPQF+Jt99on3XZc/cEwZ/+C2ghpzMdMFB1C/gSnRD7QY8c8JcsZfFi3kGadnJm+CelUPEay72ZsS++zFTebasMS4uz3enx1n15ITsLynQpST9Gp7vk0jWUdVB1K9Bm3qoqECgYEA6lD7HdbqMvHSXOCUrXmDobCyXtg+c6D/klr/CjwI0HSMwflA35ic9Mzo6C2p9g03qCv+7VLqGPpEIYNy5ms+kxUKoB93Po41iXsSgNgfafNzzdxxZDn+lx7nVpgCgQNdAynYhTnwuuzc2V1Zgl4/6epVG2UJB5R2oGnrJC1vMJcCgYEArFY22Jlys9MYDPAzTwm8hB32tWvDp/lJWLDhpT/J0PtgqtZJ72G2xbvLSYC5PblFslaDTO+tZCxIRvImST8MPd7T1DikTxWhAgHGo3wH29m6GBtQXXKJzJaTn/YRYqBRw3OwubLtlaSghuurF0i798nj/C6XrTIxIlgeCF/BaXUCgYBUTJIrqBhV/74o//s9dgwvbbyedrnxK6kG5IoBCpw5MtU5LA105BkD0Xyxm0wcY6D0de+fPkdOeSttyzbZQxgeHmHWPbvO26bTMV300Mxsd9Pf6kE5R8waXlnoQ4QTGjyqWLG3LKM4/OJvqS/8wR/Jbi70TiMzgOw0xiZ8u4PXPQKBgQCBUE/nR30iIgux6asWa5/hIvq0NyChMhUvT8qBTNQK1BU9G35u+UtEJB3uEYDuJ898eh4b5NyehfvWAG1qGLz+z+zzGW1xSjF+aAa9NZxQA5f37sbm18M+mN488U8qSlIP7wd00CYmW1l44+2FkzY4QG2qFOwLMdZchvJCJlfi4QKBgQCAFTe/KXjtnsgZXZtvCFIC0KldqTBiT5+7tL6aIPH92fVEeq2Kw5gu2Si27QGObhR3NYPiBC506pGy50ZBaB4OGCkb8+3iLblgruD2Cb1EtPqQE4zw58zL1dgchLVyn4TSihK9gMB9GRs/ePgzzoJfJ7EFpNiXT+mHieb8UoQQGg==
+                </PrivateKeyPem>
+                <CertificatePem>
+                    MIICtzCCAZ8CBgFdxbCj1jANBgkqhkiG9w0BAQsFADAfMR0wGwYDVQQDDBRhcHAtcHJvZmlsZS1qZWUtc2FtbDAeFw0xNzA4MDkwNjI5MzRaFw0yNzA4MDkwNjMxMTRaMB8xHTAbBgNVBAMMFGFwcC1wcm9maWxlLWplZS1zYW1sMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnb1SH74rHCbSAQNM+r73Wus88UBPRz8iLc2jRW6czxCD405/ACko3D/jVUl3CQbDujQB+uz4gzbI8H/DjULfbrPzPEWrki/RbMpLNAwGKRfz/uhDRToDJJsn5GBogvgESI8PPNAzXLq0t1EyQHdvRNPy+3kcMKhCQXBsOCByCGQLrxZUicAphJwS1UNp6dtixiRGiYceF0G3jQGlUKCycQzSuOOVo2Ui5sIGZ7vNwOfNrIoyIgZslsRNCkFvfyngS8HlSJY0X7jEWXQiGRyYvLjhHd8+H808IX/it2VxaKht+RN79JFklQt5cfkoIE7cAYYQkI94hCeqEAi/CZYkAwIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQBT+SeIt3auO8xmPE/TagTYe1EuIqsRWAsuE0W6UqyVaiAFoGyp7FQpuALwLsZOOu/PfU1DueQdA8vV/7nYOJi7a+WoCaztJhP5SSyahVNTGov70OWvRNuLZY5EodaEUNaWe1OP04JBb4z58GZhdh7jmpKLXoWraRkKrVSJVdbnaAU2QObW7Gt1S8jkUbVeJxoMIXO9itfW0asJQnJ6+ktrE4VpfGssFB2qWliqCuaisiX7lA95rkhz8NRo7hRJDvGol8Qrj/xpHJP2S4zO8WftdKf9brqzF8X1DG0XIo8rEDA9swWxTpfS/Hpxck53PKeWDXQk3yP5yEQDYCuCBe4m
+                </CertificatePem>
             </Key>
         </Keys>
         <IDP entityID="idp"
@@ -17,20 +19,20 @@
                                  validateResponseSignature="true"
                                  validateAssertionSignature="false"
                                  requestBinding="POST"
-                                 bindingUrl="https://sso-secure.dempsey-training2.apps.latest.xpaas/auth/realms/xpaas/protocol/saml"/>
+                                 bindingUrl="https://sso-secure.sso-training-demo.192.168.42.198.nip.io/auth/realms/xpaas/protocol/saml"/>
             <SingleLogoutService signRequest="true"
                                  signResponse="true"
                                  validateRequestSignature="true"
                                  validateResponseSignature="true"
                                  requestBinding="POST"
                                  responseBinding="POST"
-                                 postBindingUrl="https://sso-secure.dempsey-training2.apps.latest.xpaas/auth/realms/xpaas/protocol/saml"
-                                 redirectBindingUrl="https://sso-secure.dempsey-training2.apps.latest.xpaas/auth/realms/xpaas/protocol/saml"/>
+                                 postBindingUrl="https://sso-secure.sso-training-demo.192.168.42.198.nip.io/auth/realms/xpaas/protocol/saml"
+                                 redirectBindingUrl="https://sso-secure.sso-training-demo.192.168.42.198.nip.io/auth/realms/xpaas/protocol/saml"/>
             <Keys>
                 <Key signing="true">
-                   <KeyStore file="/etc/eap-secret-volume/saml.jks" password="password">
-                       <Certificate alias="xpaas"/>
-                   </KeyStore>
+                    <CertificatePem>
+                       MIICmTCCAYECBgFdxaAULjANBgkqhkiG9w0BAQsFADAQMQ4wDAYDVQQDDAV4cGFhczAeFw0xNzA4MDkwNjExMjhaFw0yNzA4MDkwNjEzMDhaMBAxDjAMBgNVBAMMBXhwYWFzMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjduAf4CurGHSJ/xWqoko97m/89+lfJqnr61BbkynUmfKgilMJRAy0zFFT7PfAe/mBxvvxcOmmYvbAZX0irVM0wT/eUVWBPOcYjwBV6aYgKaF0HsGn/tzMoQUs/uLvMgwovyOVEMElZAh04YDPgsklxOdnd5deSjq+u6vNqWMhlEVy9yTPknSz7oTpQ8mw9enlsTDvLreVDuQgbd7nWMzXoz00NdnPW5or5Ui7ozWFRWW9SBMlsU9wDe21NKxHD3KLS7iKOARhamY//YB5HiqEHw3CU0G/ouQTSPgzgqChZ7iDGhUA/+DmQ3Zbm2967/AvJlHeESLFrf18gkcTnleuQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQBgS25h99IRy1UHrTRsKa8TKc0f/OTeVn3YbFG6B3JK3ne5w+DPXApIN/gWvM2Z/vk7jW5qLR8igLrp+eegIFBx7Nh+2wY9mTVJNAJPRgol6TEBg3lNjXTLn/BSxsGLN5UVipOCNWiY0K/SMJqKs1LfZ1wm1R7y/eIIgE68IzxcQgAE+yAKTjqxpOVh7bAGsLv2xq+730kvw+gVLLAAOK1MI8mbRKTr3BddnrNxXSgHG9BFTOG5eyBZAiCFv+2pQ0QC6st3Yf1NkbPW2NzplrRyicIXPoA0CfhIrloQMlL185Ga0/D3w1fjKxjWkEFqS42Gc/iCWY6aTqFWMRglLaRT
+                    </CertificatePem>
                 </Key>
             </Keys>
         </IDP>
