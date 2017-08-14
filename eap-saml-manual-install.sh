@@ -16,3 +16,4 @@ oc process eap70-https-s2i \
   JGROUPS_ENCRYPT_PASSWORD=password \
   | oc create -f - 
 
+

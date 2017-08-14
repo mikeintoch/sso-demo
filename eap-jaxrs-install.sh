@@ -2,8 +2,8 @@
 
 oc process eap70-sso-s2i \
   APPLICATION_NAME=jaxrs \
-  HOSTNAME_HTTPS=jaxrs-secure.dempsey-training2.apps.latest.xpaas \
-  SOURCE_REPOSITORY_URL=https://github.com/maschmid/sso-demo.git \
+  HOSTNAME_HTTPS=jaxrs-secure.sso-training-demo.192.168.42.198.nip.io \
+  SOURCE_REPOSITORY_URL=https://github.com/mikeintoch/sso-demo.git \
   SOURCE_REPOSITORY_REF=master \
   CONTEXT_DIR=service-jaxrs \
   ARTIFACT_DIR=target \
@@ -19,7 +19,7 @@ oc process eap70-sso-s2i \
   SSO_SAML_KEYSTORE="" \
   SSO_SAML_CERTIFICATE_NAME="" \
   SSO_SAML_KEYSTORE_PASSWORD="" \
-  SSO_URL=https://sso-secure.dempsey-training2.apps.latest.xpaas/auth \
+  SSO_URL=https://sso-secure.sso-training-demo.192.168.42.198.nip.io/auth \
   SSO_REALM=xpaas \
   SSO_USERNAME=mgmtuser \
   SSO_PASSWORD=mgmtpass \

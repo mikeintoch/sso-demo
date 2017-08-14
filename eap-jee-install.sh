@@ -2,8 +2,8 @@
 
 oc process eap70-sso-s2i \
   APPLICATION_NAME=jee \
-  HOSTNAME_HTTPS=jee-secure.dempsey-training2.apps.latest.xpaas \
-  SOURCE_REPOSITORY_URL=https://github.com/maschmid/sso-demo.git \
+  HOSTNAME_HTTPS=jee-secure.sso-training-demo.192.168.42.198.nip.io \
+  SOURCE_REPOSITORY_URL=https://github.com/mikeintoch/sso-demo.git \
   SOURCE_REPOSITORY_REF=master \
   CONTEXT_DIR=app-jee \
   ARTIFACT_DIR=target \
@@ -19,7 +19,7 @@ oc process eap70-sso-s2i \
   SSO_SAML_KEYSTORE="" \
   SSO_SAML_CERTIFICATE_NAME="" \
   SSO_SAML_KEYSTORE_PASSWORD="" \
-  SSO_URL=https://sso-secure.dempsey-training2.apps.latest.xpaas/auth \
+  SSO_URL=https://sso-secure.sso-training-demo.192.168.42.198.nip.io/auth \
   SSO_REALM=xpaas \
   SSO_USERNAME=mgmtuser \
   SSO_PASSWORD=mgmtpass \
@@ -27,6 +27,6 @@ oc process eap70-sso-s2i \
   SSO_TRUSTSTORE_PASSWORD=password \
   SSO_TRUSTSTORE_SECRET=eap-jee-secret | oc create -f - 
 
-oc env dc jee SERVICE_URL=https://jaxrs-secure.dempsey-training2.apps.latest.xpaas/service-jaxrs
+oc env dc jee SERVICE_URL=https://jaxrs-secure.sso-training-demo.192.168.42.198.nip.io/service-jaxrs
 oc env dc jee JAVA_OPTS_APPEND="-Djavax.net.ssl.trustStore=/etc/eap-secret-volume/truststore.jks -Djavax.net.ssl.trustStorePassword=password"
 

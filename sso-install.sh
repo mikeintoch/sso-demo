@@ -1,7 +1,7 @@
 #!/bin/sh
 
 oc process sso70-postgresql-persistent \
-  HOSTNAME_HTTPS=sso-secure.dempsey-training2.apps.latest.xpaas \
+  HOSTNAME_HTTPS=sso-secure.sso-training-demo.192.168.42.198.nip.io \
   HTTPS_NAME=sso-secure \
   HTTPS_SECRET=sso-secret \
   HTTPS_KEYSTORE=keystore.jks \

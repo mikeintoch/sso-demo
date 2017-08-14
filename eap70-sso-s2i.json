@@ -367,7 +367,7 @@
                         "forcePull": true,
                         "from": {
                             "kind": "ImageStreamTag",
-                            "name": "jboss-eap70-openshift:1.4-6"
+                            "name": "jboss-eap70-openshift:1.5-16"
                         },
                         "env": [
                             {

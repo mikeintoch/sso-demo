@@ -1,6 +1,6 @@
 #!/bin/sh
 
-namespace=dempsey-training2
+namespace=sso-demo-training
 
 # Create the service account
 oc create serviceaccount sso-service-account

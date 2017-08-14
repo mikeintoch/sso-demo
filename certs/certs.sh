@@ -12,7 +12,7 @@ openssl req -new -newkey rsa:4096 -x509 -keyout ca-key.pem -out ca-certificate.p
 # Import CA cert as "truststore"
 keytool -import -noprompt -keystore truststore.jks -file ca-certificate.pem -alias xpaas.ca -storepass "password"
 
-suffix=dempsey-training2.apps.latest.xpaas
+suffix=sso-training-demo.192.168.42.198.nip.io
 
 for appname in sso-secure jaxrs-secure jee-secure profile-secure
 do
@@ -34,5 +34,3 @@ do
   # Import signed cert  into keystore
   keytool -import -keystore ${keystore} -file ${CN}".cer" -alias ${appname} -storepass "password"
 done
-
-
