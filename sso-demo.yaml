@@ -1,0 +1,384 @@
+---
+- name: Install SSO DEMO
+  hosts: localhost
+  vars_files:
+    - vars.yaml
+  tasks:
+
+    - include: setup.yaml
+
+    - name: Login in OpenShift
+      shell: "oc login --insecure-skip-tls-verify=true -u {{ username }} -p {{ password }} {{ openshift_console }}"
+      tags:
+        - openshift
+
+    - name: Create a new OpenShift project
+      shell: "oc new-project {{ project_name }}"
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+        - openshift
+
+- name: Preparing Image Streams and Templates
+  hosts: localhost
+  vars_files:
+    - vars.yaml
+  tasks:
+
+    - name: Preparing sso70 image stream
+      shell: "oc create -f https://raw.githubusercontent.com/mikeintoch/sso-demo/master/sso70-image-stream.json"
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+        - openshift
+        - sso-demo
+
+    - name: Preparing sso70-postgresql-template
+      shell: "oc create -f https://raw.githubusercontent.com/mikeintoch/sso-demo/master/sso70-postgresql-persistent.json"
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+        - openshift
+        - sso-demo
+
+    - name: Preparing eap70 image eap70-image-stream
+      shell: "oc create -f https://raw.githubusercontent.com/mikeintoch/sso-demo/master/eap70-image-stream.json"
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+        - openshift
+        - sso-demo
+
+    - name: Preparing template eap70-sso-s2i
+      shell: "oc create -f https://raw.githubusercontent.com/mikeintoch/sso-demo/master/eap70-sso-s2i.json"
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+        - openshift
+        - sso-demo
+
+    - name: Preparing template eap70-https-s2i
+      shell: "oc create -f https://raw.githubusercontent.com/mikeintoch/sso-demo/master/eap70-https-s2i.json"
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+        - openshift
+        - sso-demo
+
+- name: Preparing keystores and service accounts
+  hosts: localhost
+  vars_files:
+    - vars.yaml
+  tasks:
+
+    - name: Deleting old files
+      file:
+        path: certs/
+        state: absent
+      tags:
+        - openshift
+        - keystore
+
+    - name: Creating certs directory
+      file:
+        path: certs
+        state: directory
+      tags:
+        - openshift
+        - keystore
+
+
+
+    - name: Generate the symmetric key for jgroups
+      shell: "keytool -genseckey -keyalg AES -keysize 256 -alias jgroups-key -keystore jgroups.jceks -storetype JCEKS -storepass \"{{ ks_password }}\" -keypass \"{{ ks_password }}\""
+      args:
+        chdir: certs/
+      tags:
+        - openshift
+        - keystore
+
+    - name: Prepare CA key and cert
+      shell: "openssl req -new -newkey rsa:4096 -x509 -keyout ca-key.pem -out ca-certificate.pem -days 365 -passout pass:{{ ks_password }} -subj \"/C=CZ/ST=CZ/L=Brno/O=QE/CN=xpaas.ca\""
+      args:
+        chdir: certs/
+      tags:
+        - openshift
+        - keystore
+
+    - name: Import CA cert as "truststore"
+      shell: "keytool -import -noprompt -keystore truststore.jks -file ca-certificate.pem -alias xpaas.ca -storepass \"{{ ks_password }}\""
+      args:
+        chdir: certs/
+      tags:
+        - openshift
+        - keystore
+
+    - name: Create a keystore with new keypair for a given CN
+      shell: "keytool -genkeypair -keyalg RSA -noprompt -alias {{ item.name }} -dname \"CN={{ item.name }}.{{ domain }}, OU=QE, O=RedHat, L=Brno, S=CZ, C=CZ\" -keystore {{ item.name }}.jks -storepass \"{{ ks_password }}\" -keypass \"{{ ks_password }}\""
+      args:
+        chdir: certs/
+      with_items: "{{ sso_projects }}"
+      tags:
+        - openshift
+        - keystore
+
+    - name: Generate a certificate request
+      shell: "keytool -keystore {{ item.name }}.jks -certreq -alias {{ item.name }} --keyalg rsa -file {{ item.name }}.{{ domain }}.csr -storepass \"{{ ks_password }}\""
+      args:
+        chdir: certs/
+      with_items: "{{ sso_projects }}"
+      tags:
+        - openshift
+        - keystore
+
+    - name: Sign the certificate request with CA cert
+      shell: "openssl x509 -req -CA ca-certificate.pem -CAkey ca-key.pem -in {{ item.name }}.{{ domain }}.csr -out {{ item.name }}.{{ domain }}.cer -days 365 -CAcreateserial -passin \"pass:{{ ks_password }}\""
+      args:
+        chdir: certs/
+      with_items: "{{ sso_projects }}"
+      tags:
+        - openshift
+        - keystore
+
+    - name: Import CA cert into keystore
+      shell: "keytool -import -noprompt -keystore {{ item.name }}.jks -file ca-certificate.pem -alias xpaas.ca -storepass \"{{ ks_password }}\""
+      args:
+        chdir: certs/
+      with_items: "{{ sso_projects }}"
+      tags:
+        - openshift
+        - keystore
+
+    - name: Import signed cert into keystore
+      shell: "keytool -import -keystore {{ item.name }}.jks -file {{ item.name }}.{{ domain }}.cer -alias {{ item.name }} -storepass \"{{ ks_password }}\""
+      args:
+        chdir: certs/
+      with_items: "{{ sso_projects }}"
+      tags:
+        - openshift
+        - keystore
+
+
+- name: Preparing keystores and service accounts
+  hosts: localhost
+  vars_files:
+    - vars.yaml
+  tasks:
+
+    - name: Create secrets sso-secret
+      shell: "oc secrets new sso-secret keystore.jks=sso-secure.jks truststore.jks=truststore.jks jgroups.jceks=jgroups.jceks"
+      args:
+        chdir: certs/
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+        - openshift
+        - keystore
+
+    - name: Create secrets eap-jaxrs-secret
+      shell: "oc secrets new eap-jaxrs-secret keystore.jks=jaxrs-secure.jks truststore.jks=truststore.jks jgroups.jceks=jgroups.jceks"
+      args:
+        chdir: certs/
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+        - openshift
+        - keystore
+
+    - name: Create secrets eap-jee-secret
+      shell: "oc secrets new eap-jee-secret keystore.jks=jee-secure.jks truststore.jks=truststore.jks jgroups.jceks=jgroups.jceks"
+      args:
+        chdir: certs/
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+        - openshift
+        - keystore
+
+    - name: Create secrets eap-profile-secret
+      shell: "oc secrets new eap-profile-secret keystore.jks=profile-secure.jks truststore.jks=truststore.jks jgroups.jceks=jgroups.jceks"
+      args:
+        chdir: certs/
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+        - openshift
+        - keystore
+
+    - name: Login in OpenShift as administrator
+      shell: "oc login --insecure-skip-tls-verify=true -u {{ admin_username }} -p {{ admin_password }} {{ openshift_console }}"
+      tags:
+        - openshift
+        - admin
+
+    - name: Add view role to the service accounts sso-service-account (for kubeping clustering)
+      shell: "oc policy add-role-to-user view system:serviceaccount:{{ project_name }}:sso-service-account"
+      args:
+        chdir: certs/
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+        - openshift
+        - keystore
+
+    - name: Add view role to the service accounts eap-service-account (for kubeping clustering)
+      shell: "oc policy add-role-to-user view system:serviceaccount:{{ project_name }}:eap-service-account"
+      args:
+        chdir: certs/
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+        - openshift
+        - keystore
+
+- name: Installing SSO Project
+  hosts: localhost
+  vars_files:
+    - vars.yaml
+  tasks:
+
+    - name: Login in OpenShift
+      shell: "oc login --insecure-skip-tls-verify=true -u {{ username }} -p {{ password }} {{ openshift_console }}"
+      tags:
+        - openshift
+
+    - name: Define project={{ project_name }}
+      shell: "oc project {{ project_name }}"
+      tags:
+        - openshift
+
+    - name: Installing sso project
+      shell: "oc process sso70-postgresql-persistent \
+              HOSTNAME_HTTPS=sso-secure.{{ domain }} \
+              HTTPS_NAME=sso-secure \
+              HTTPS_SECRET=sso-secret \
+              HTTPS_KEYSTORE=keystore.jks \
+              HTTPS_PASSWORD={{ ks_password }} \
+              JGROUPS_ENCRYPT_SECRET=sso-secret \
+              JGROUPS_ENCRYPT_KEYSTORE=jgroups.jceks \
+              JGROUPS_ENCRYPT_PASSWORD=password \
+              JGROUPS_ENCRYPT_NAME=jgroups-key \
+              SSO_REALM=xpaas \
+              SSO_SERVICE_USERNAME=mgmtuser \
+              SSO_SERVICE_PASSWORD=mgmtpass \
+              SSO_TRUSTSTORE=/etc/eap-secret-volume/truststore.jks \
+              SSO_TRUSTSTORE_PASSWORD={{ ks_password }} \
+              SSO_TRUSTSTORE_SECRET=sso-secret | oc create -f - "
+      args:
+        chdir: certs/
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+        - openshift
+        - keystore
+
+    - name: Waiting to create and running SSO Containers
+         pause:
+             minutes: 5
+         tags:
+            - install_sso_demo
+
+    - name: Installing jax-rs project
+      shell: "oc process eap70-sso-s2i \
+              APPLICATION_NAME=jaxrs \
+              HOSTNAME_HTTPS=jaxrs-secure.{{ domain }} \
+              SOURCE_REPOSITORY_URL=https://github.com/mikeintoch/sso-demo.git \
+              SOURCE_REPOSITORY_REF=master \
+              CONTEXT_DIR=service-jaxrs \
+              ARTIFACT_DIR=target \
+              HTTPS_SECRET=eap-jaxrs-secret \
+              HTTPS_KEYSTORE=keystore.jks \
+              HTTPS_NAME=jaxrs-secure \
+              HTTPS_PASSWORD=password \
+              JGROUPS_ENCRYPT_SECRET=eap-jaxrs-secret \
+              JGROUPS_ENCRYPT_KEYSTORE=jgroups.jceks \
+              JGROUPS_ENCRYPT_NAME=jgroups-key \
+              JGROUPS_ENCRYPT_PASSWORD={{ ks_password }} \
+              SSO_SAML_KEYSTORE_SECRET=eap-jaxrs-secret \
+              SSO_SAML_KEYSTORE=\"\" \
+              SSO_SAML_CERTIFICATE_NAME=\"\" \
+              SSO_SAML_KEYSTORE_PASSWORD=\"\" \
+              SSO_URL=https://sso-secure.{{ domain }}/auth \
+              SSO_REALM=xpaas \
+              SSO_USERNAME=mgmtuser \
+              SSO_PASSWORD=mgmtpass \
+              SSO_BEARER_ONLY=true \
+              SSO_ENABLE_CORS=true \
+              SSO_TRUSTSTORE=/etc/eap-secret-volume/truststore.jks \
+              SSO_TRUSTSTORE_PASSWORD={{ ks_password }} \
+              SSO_TRUSTSTORE_SECRET=eap-jaxrs-secret | oc create -f - "
+      args:
+        chdir: certs/
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+         - openshift
+         - keystore
+
+    - name: Installing eap-jee project
+      shell: "oc process eap70-sso-s2i \
+              APPLICATION_NAME=jee \
+              HOSTNAME_HTTPS=jee-secure.{{ domain }} \
+              SOURCE_REPOSITORY_URL=https://github.com/mikeintoch/sso-demo.git \
+              SOURCE_REPOSITORY_REF=master \
+              CONTEXT_DIR=app-jee \
+              ARTIFACT_DIR=target \
+              HTTPS_SECRET=eap-jee-secret \
+              HTTPS_KEYSTORE=keystore.jks \
+              HTTPS_NAME=jee-secure \
+              HTTPS_PASSWORD={{ ks_password }} \
+              JGROUPS_ENCRYPT_SECRET=eap-jee-secret \
+              JGROUPS_ENCRYPT_KEYSTORE=jgroups.jceks \
+              JGROUPS_ENCRYPT_NAME=jgroups-key \
+              JGROUPS_ENCRYPT_PASSWORD={{ ks_password }} \
+              SSO_SAML_KEYSTORE_SECRET=eap-jee-secret \
+              SSO_SAML_KEYSTORE=\"\" \
+              SSO_SAML_CERTIFICATE_NAME=\"\" \
+              SSO_SAML_KEYSTORE_PASSWORD=\"\" \
+              SSO_URL=https://sso-secure.{{ domain }}/auth \
+              SSO_REALM=xpaas \
+              SSO_USERNAME=mgmtuser \
+              SSO_PASSWORD=mgmtpass \
+              SSO_TRUSTSTORE=/etc/eap-secret-volume/truststore.jks \
+              SSO_TRUSTSTORE_PASSWORD={{ ks_password }} \
+              SSO_TRUSTSTORE_SECRET=eap-jee-secret | oc create -f - "
+      args:
+        chdir: certs/
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+         - openshift
+         - keystore
+
+    - name: Configuring SERVICE_URL environment variable to eap-jee project
+      shell: "oc env dc jee SERVICE_URL=https://jaxrs-secure.{{ domain }}/service-jaxrs"
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+         - openshift
+         - keystore
+
+    - name: Configuring JAVA_OPTS_APPEND environment variable to eap-jee project
+      shell: "oc env dc jee JAVA_OPTS_APPEND=\"-Djavax.net.ssl.trustStore=/etc/eap-secret-volume/truststore.jks -Djavax.net.ssl.trustStorePassword={{ ks_password }}\""
+      register: command_result
+      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+      changed_when: "'exists' not in command_result.stderr"
+      tags:
+         - openshift
+         - keystore
