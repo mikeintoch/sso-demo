@@ -68,14 +68,17 @@
   vars_files:
     - vars.yaml
   tasks:
+    - name: Deleting old certs files
+      find:
+        paths: certs/
+        patterns: '*.pem,*.cer,*.csr,*.jks,*.jceks,*.srl'
+      register: files_to_delete
 
-    - name: "Deleting old certs files" 
-      shell: "rm *.pem *.cer *.csr *.jks *.jcek *.srl"
-      args:
-        chdir: certs/
-      tags:
-        - openshift
-        - keystore
+    - name: Deleting old certs file
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      with_items: "{{ files_to_delete.files }}"
 
     - name: Generate the symmetric key for jgroups
       shell: "keytool -genseckey -keyalg AES -keysize 256 -alias jgroups-key -keystore jgroups.jceks -storetype JCEKS -storepass \"{{ ks_password }}\" -keypass \"{{ ks_password }}\""
