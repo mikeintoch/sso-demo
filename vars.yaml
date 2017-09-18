@@ -2,7 +2,7 @@
 #UNCOMMENT Define the Openshift host:port address
 openshift_console: 192.168.42.19:8443
 
-#UNCOMMENTCustomize rhe domain of the project
+#UNCOMMENT Customize rhe domain of the project
 domain: 192.168.42.19.nip.io
 
 #Your Openshift credentials

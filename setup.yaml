@@ -9,6 +9,22 @@
   tags:
     - openshift
     - admin
+- name: Create a new OpenShift project
+  shell: "oc new-project {{ project_name }}"
+  register: command_result
+  failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+  changed_when: "'exists' not in command_result.stderr"
+  tags:
+    - openshift
+
+- name: Adding to {{ username }} user admin role  for the {{ project_name }} project
+  shell: "oc adm policy add-role-to-user admin {{ username }} -n {{ project_name }}"
+  register: command_result
+  failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
+  changed_when: "'exists' not in command_result.stderr"
+  tags:
+    - openshift
+    - admin
 
 # Create the service account
 - name: Create service account sso-service-account
@@ -18,6 +34,7 @@
   changed_when: "'exists' not in command_result.stderr"
   tags:
     - openshift
+    - admin
 
 - name: Create service account eap-service-account
   shell: "oc create serviceaccount eap-service-account"
@@ -26,3 +43,4 @@
   changed_when: "'exists' not in command_result.stderr"
   tags:
     - openshift
+    - admin

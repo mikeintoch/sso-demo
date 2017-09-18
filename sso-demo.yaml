@@ -1,5 +1,5 @@
 ---
-- name: Install SSO DEMO
+- name: Setup and installing sso demo.
   hosts: localhost
   vars_files:
     - vars.yaml
@@ -9,14 +9,6 @@
 
     - name: Login in OpenShift
       shell: "oc login --insecure-skip-tls-verify=true -u {{ username }} -p {{ password }} {{ openshift_console }}"
-      tags:
-        - openshift
-
-    - name: Create a new OpenShift project
-      shell: "oc new-project {{ project_name }}"
-      register: command_result
-      failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
-      changed_when: "'exists' not in command_result.stderr"
       tags:
         - openshift
 
@@ -77,23 +69,13 @@
     - vars.yaml
   tasks:
 
-    - name: Deleting old files
-      file:
-        path: certs/
-        state: absent
+    - name: "Deleting old certs files" 
+      shell: "rm *.pem *.cer *.csr *.jks *.jcek *.srl"
+      args:
+        chdir: certs/
       tags:
         - openshift
         - keystore
-
-    - name: Creating certs directory
-      file:
-        path: certs
-        state: directory
-      tags:
-        - openshift
-        - keystore
-
-
 
     - name: Generate the symmetric key for jgroups
       shell: "keytool -genseckey -keyalg AES -keysize 256 -alias jgroups-key -keystore jgroups.jceks -storetype JCEKS -storepass \"{{ ks_password }}\" -keypass \"{{ ks_password }}\""
