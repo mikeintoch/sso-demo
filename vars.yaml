@@ -1,23 +1,23 @@
 ---
-#Define the Openshift host:port address
-#openshift_console: 192.168.42.19:8443
+#UNCOMMENT Define the Openshift host:port address
+openshift_console: 192.168.42.19:8443
 
-#Customize rhe domain of the project
-#domain: 192.168.42.19.nip.io
+#UNCOMMENTCustomize rhe domain of the project
+domain: 192.168.42.19.nip.io
 
 #Your Openshift credentials
-#username: developer
-#password: developer
+username: developer
+password: developer
 
 #Administrative Credentials
-#admin_username: system:admin
-#admin_password: "''"
+admin_username: system:admin
+admin_password: "''"
 
 #Define the name of the Openshift project
-#project_name: sso-demo
+project_name: sso-demo
 
 #Define the keystore password
-#ks_password: password
+ks_password: password
 
 # Project definition - You don't need to change anything here
 sso_projects:

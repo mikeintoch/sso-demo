@@ -286,10 +286,10 @@
         - keystore
 
     - name: Waiting to create and running SSO Containers
-         pause:
-             minutes: 5
-         tags:
-            - install_sso_demo
+      pause:
+        minutes: 5
+      tags:
+        - install_sso_demo
 
     - name: Installing jax-rs project
       shell: "oc process eap70-sso-s2i \
