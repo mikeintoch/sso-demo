@@ -1,9 +1,9 @@
 ---
 #UNCOMMENT Define the Openshift host:port address
-openshift_console: 192.168.42.19:8443
+#openshift_console: 192.168.42.19:8443
 
 #UNCOMMENT Customize rhe domain of the project
-domain: 192.168.42.19.nip.io
+#domain: 192.168.42.19.nip.io
 
 #Your Openshift credentials
 username: developer
@@ -13,11 +13,17 @@ password: developer
 admin_username: system:admin
 admin_password: "''"
 
+#JAX-RS AND JEE-APP URL repository
+git_repository: https://github.com/mikeintoch/sso-demo.git
+
+
 #Define the name of the Openshift project
 project_name: sso-demo
 
 #Define the keystore password
 ks_password: password
+
+#Define github
 
 # Project definition - You don't need to change anything here
 sso_projects:

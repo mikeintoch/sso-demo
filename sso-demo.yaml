@@ -19,7 +19,7 @@
   tasks:
 
     - name: Preparing sso70 image stream
-      shell: "oc create -f https://raw.githubusercontent.com/mikeintoch/sso-demo/master/sso70-image-stream.json"
+      shell: "oc create -f sso70-image-stream.json"
       register: command_result
       failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
       changed_when: "'exists' not in command_result.stderr"
@@ -28,7 +28,7 @@
         - sso-demo
 
     - name: Preparing sso70-postgresql-template
-      shell: "oc create -f https://raw.githubusercontent.com/mikeintoch/sso-demo/master/sso70-postgresql-persistent.json"
+      shell: "oc create -f sso70-postgresql-persistent.json"
       register: command_result
       failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
       changed_when: "'exists' not in command_result.stderr"
@@ -37,7 +37,7 @@
         - sso-demo
 
     - name: Preparing eap70 image eap70-image-stream
-      shell: "oc create -f https://raw.githubusercontent.com/mikeintoch/sso-demo/master/eap70-image-stream.json"
+      shell: "oc create -f eap70-image-stream.json"
       register: command_result
       failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
       changed_when: "'exists' not in command_result.stderr"
@@ -46,7 +46,7 @@
         - sso-demo
 
     - name: Preparing template eap70-sso-s2i
-      shell: "oc create -f https://raw.githubusercontent.com/mikeintoch/sso-demo/master/eap70-sso-s2i.json"
+      shell: "oc create -f eap70-sso-s2i.json"
       register: command_result
       failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
       changed_when: "'exists' not in command_result.stderr"
@@ -55,7 +55,7 @@
         - sso-demo
 
     - name: Preparing template eap70-https-s2i
-      shell: "oc create -f https://raw.githubusercontent.com/mikeintoch/sso-demo/master/eap70-https-s2i.json"
+      shell: "oc create -f eap70-https-s2i.json"
       register: command_result
       failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
       changed_when: "'exists' not in command_result.stderr"
@@ -280,7 +280,7 @@
       shell: "oc process eap70-sso-s2i \
               APPLICATION_NAME=jaxrs \
               HOSTNAME_HTTPS=jaxrs-secure.{{ domain }} \
-              SOURCE_REPOSITORY_URL=https://github.com/mikeintoch/sso-demo.git \
+              SOURCE_REPOSITORY_URL={{ git_repository }} \
               SOURCE_REPOSITORY_REF=master \
               CONTEXT_DIR=service-jaxrs \
               ARTIFACT_DIR=target \
@@ -318,7 +318,7 @@
       shell: "oc process eap70-sso-s2i \
               APPLICATION_NAME=jee \
               HOSTNAME_HTTPS=jee-secure.{{ domain }} \
-              SOURCE_REPOSITORY_URL=https://github.com/mikeintoch/sso-demo.git \
+              SOURCE_REPOSITORY_URL={{ git_repository }} \
               SOURCE_REPOSITORY_REF=master \
               CONTEXT_DIR=app-jee \
               ARTIFACT_DIR=target \

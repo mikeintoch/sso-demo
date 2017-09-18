@@ -1,7 +1,7 @@
 ---
 - name: Verify if variables are set
   fail:
-    msg: "[Openshit host] and/or [Openshift subdomain] is not defined. Please edit vars.yml"
+    msg: "[Openshit host] and/or [Openshift subdomain] and/or are not defined. Please edit vars.yml"
   when: (openshift_console is undefined) or (domain is undefined)
 
 - name: Login in OpenShift as administrator

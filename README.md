@@ -1,3 +1,24 @@
-# sso-demo
+## Install SSO Demo using Ansible
 
-TODO
+link:https://www.ansible.com/[Ansible] can be used to automate the installation process to setup SSO-DEMO in CDK.
+
+Make sure you have the following requirenments installed:
+
+And run the following commands:
+
+----
+$ git clone https://github.com/mikeintoch/sso-demo.git
+$ cd sso-demo/
+----
+
+First, *edit the vars.yaml file* to define the *'openshift_console'*, *'domain'* variables and set the admin console and provide subdomain for your openshift installation.
+
+Then execute:
+
+----
+$ ansible-playbook sso-demo.yaml
+----
+
+The playbook will take approximately 10-15 minutes to complete. After that OpenShift should take more 5 minutes to finish the installation and boot of RH SSO Console, JAX-RS and JEE-APP pods.
+
+NOTE: This approach is used to make it easy to create an environment with all pieces of this demo. However in a real environmente, each component can *and should* be deployed independently.
