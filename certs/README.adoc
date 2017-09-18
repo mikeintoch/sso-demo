@@ -1,0 +1,3 @@
+## Install SSO Demo using Ansible
+
+NOTE: This folder contains cert file to provides ssl feature to RH SSO Console and applications.
