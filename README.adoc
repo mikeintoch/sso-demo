@@ -2,7 +2,10 @@
 
 link:https://www.ansible.com/[Ansible] can be used to automate the installation process to setup SSO-DEMO in CDK.
 
-Make sure you have the following requirenments installed:
+Make sure you have the following requirements installed:
+
+- Git
+- Ansible 1.9+
 
 And run the following commands:
 
