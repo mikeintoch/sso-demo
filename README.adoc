@@ -26,7 +26,7 @@ The playbook will take approximately 10-15 minutes to complete. After that OpenS
 
 Access to your RH SSO Admin Console and use the next configurations:
 
-- username: admin
-- password: admin
+- username: *admin*
+- password: *admin*
 
 NOTE: This approach is used to make it easy to create an environment with all pieces of this demo. However in a real environmente, each component can *and should* be deployed independently.
