@@ -367,7 +367,7 @@
                         "forcePull": true,
                         "from": {
                             "kind": "ImageStreamTag",
-                            "name": "jboss-eap70-openshift:1.5-16"
+                            "name": "jboss-eap70-openshift:1.5"
                         },
                         "env": [
                             {
@@ -534,7 +534,7 @@
                                     {
                                         "name": "HOSTNAME_HTTPS",
                                         "value": "${HOSTNAME_HTTPS}"
-                                    }, 
+                                    },
                                     {
                                         "name": "HTTPS_KEYSTORE_DIR",
                                         "value": "/etc/eap-secret-volume"
