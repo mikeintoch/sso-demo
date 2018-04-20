@@ -8,10 +8,10 @@
             "tags": "eap,javaee,java,jboss,xpaas,sso,keycloak",
             "version": "1.3.0"
         },
-        "name": "eap70-sso-s2i"
+        "name": "eap71-sso-s2i"
     },
     "labels": {
-        "template": "eap70-sso-s2i",
+        "template": "eap71-sso-s2i",
         "xpaas": "1.3.0"
     },
     "parameters": [
@@ -367,7 +367,7 @@
                         "forcePull": true,
                         "from": {
                             "kind": "ImageStreamTag",
-                            "name": "jboss-eap70-openshift:1.5"
+                            "name": "jboss-eap71-openshift:1.2"
                         },
                         "env": [
                             {

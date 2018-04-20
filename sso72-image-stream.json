@@ -1,0 +1,40 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "jboss-image-streams",
+        "annotations": {
+            "description": "ImageStream definitions for JBoss Middleware products."
+        }
+    },
+    "items": [
+        {
+            "kind": "ImageStream",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "redhat-sso72-openshift",
+                "annotations": {
+                    "description": "Red Hat SSO 7.2",
+                    "openshift.io/display-name": "Red Hat Single Sign-On 7.2"
+                }
+            },
+            "spec": {
+                "dockerImageRepository": "registry.access.redhat.com/redhat-sso-7/sso72-openshift",
+                "tags": [
+                    {
+                        "name": "1.0",
+                        "annotations": {
+                            "description": "Red Hat SSO 7.2",
+                            "iconClass": "icon-jboss",
+                            "tags": "sso,keycloak,redhat",
+                            "supports": "sso:7.2,xpaas:1.5",
+                            "version": "1.0",
+                            "openshift.io/display-name": "Red Hat Single Sign-On 7.2"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+

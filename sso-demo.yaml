@@ -18,8 +18,8 @@
     - vars.yaml
   tasks:
 
-    - name: Preparing sso70 image stream
-      shell: "oc create -f sso70-image-stream.json"
+    - name: Preparing sso72 image stream
+      shell: "oc create -f sso72-image-stream.json"
       register: command_result
       failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
       changed_when: "'exists' not in command_result.stderr"
@@ -27,8 +27,8 @@
         - openshift
         - sso-demo
 
-    - name: Preparing sso70-postgresql-template
-      shell: "oc create -f sso70-postgresql-persistent.json"
+    - name: Preparing sso72-postgresql-template
+      shell: "oc create -f sso72-postgresql-persistent.json"
       register: command_result
       failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
       changed_when: "'exists' not in command_result.stderr"
@@ -36,8 +36,8 @@
         - openshift
         - sso-demo
 
-    - name: Preparing eap70 image eap70-image-stream
-      shell: "oc create -f eap70-image-stream.json"
+    - name: Preparing eap71 image eap71-image-stream
+      shell: "oc create -f eap71-image-stream.json"
       register: command_result
       failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
       changed_when: "'exists' not in command_result.stderr"
@@ -45,8 +45,8 @@
         - openshift
         - sso-demo
 
-    - name: Preparing template eap70-sso-s2i
-      shell: "oc create -f eap70-sso-s2i.json"
+    - name: Preparing template eap71-sso-s2i
+      shell: "oc create -f eap71-sso-s2i.json"
       register: command_result
       failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
       changed_when: "'exists' not in command_result.stderr"
@@ -54,8 +54,8 @@
         - openshift
         - sso-demo
 
-    - name: Preparing template eap70-https-s2i
-      shell: "oc create -f eap70-https-s2i.json"
+    - name: Preparing template eap71-https-s2i
+      shell: "oc create -f eap71-https-s2i.json"
       register: command_result
       failed_when: "'exists' not in command_result.stderr and command_result.rc != 0"
       changed_when: "'exists' not in command_result.stderr"
@@ -245,7 +245,7 @@
         - openshift
 
     - name: Installing sso project
-      shell: "oc process sso70-postgresql-persistent \
+      shell: "oc process sso72-postgresql-persistent \
               HOSTNAME_HTTPS=sso-secure.{{ domain }} \
               HTTPS_NAME=sso-secure \
               HTTPS_SECRET=sso-secret \
@@ -277,7 +277,7 @@
         - install_sso_demo
 
     - name: Installing jax-rs project
-      shell: "oc process eap70-sso-s2i \
+      shell: "oc process eap71-sso-s2i \
               APPLICATION_NAME=jaxrs \
               HOSTNAME_HTTPS=jaxrs-secure.{{ domain }} \
               SOURCE_REPOSITORY_URL={{ git_repository }} \
@@ -315,7 +315,7 @@
          - keystore
 
     - name: Installing eap-jee project
-      shell: "oc process eap70-sso-s2i \
+      shell: "oc process eap71-sso-s2i \
               APPLICATION_NAME=jee \
               HOSTNAME_HTTPS=jee-secure.{{ domain }} \
               SOURCE_REPOSITORY_URL={{ git_repository }} \
